@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> HAPPY PARTY </title>
+    <style>
+        /* إضافة تأثير الدخان */
+        body {
+            background: url('Smoke pink1.gif') no-repeat center center fixed; /* مسار الصورة للخلفية */
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            background-size: 400% 400%;
+            animation: smokeAnimation 0,5s ease infinite;
+        }
+
+        @keyframes smokeAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9); /* خلفية شبه شفافة */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            position: relative;
+            z-index: 1; /* لضمان أن يكون فوق الخلفية */
+
+            background-color: rgba(21, 255, 0, 0.774); /* لون الخلفية للحاوية مع شفافية */
+            box-shadow: 0 0 10px rgb(255, 217, 0); /* ظل ذهبي */
+            text-align: center;        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #d63384;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b52a6f;
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #d63384;
+        }
+
+        #bookingsList {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .booking-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(51, 51, 51, 0.8); /* خلفية شبه شفافة */
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #d63384;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> HAPPY PARTY </h1>
+        <form id="bookingForm">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">رقم الهاتف:</label>
+            <h5> ملحوظه : يشترط أن يكون به واتساب و يسمح عليه المكالمات من أجل التواصل .</h5>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="date">تاريخ الحفلة:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">الساعة:</label>
+            <h5> برجاء تحديد موعد بدء الحفلة</h5>
+            <input type="time" id="time" name="time" required>
+
+            <label for="location">موقع الحفلة:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="package"> نوع الحفلة </label>
+            <select id="package" name="package">
+                <option value="عرض السبوع"> عرض السبوع </option>
+                <option value="عرض المدارس"> عرض المدارس </option>
+                <option value="عرض الحضانة"> عرض الحضانة </option>
+                <option value="عرض الافتتاحات"> عرض الافتتاحات </option>
+                <option value="عرض الاعياد الميلاد"> عرض الاعياد الميلاد</option>
+                <option value="عرض الحفلات"> عرض الحفلات </option>
+            </select>
+
+            <label for="type"> اختر العرض </label>
+            <select id="type" name="type">
+                <option value="عرض البرونزي"> عرض البرونزي ( عروسة من اختيارك ) </option>
+                <option value="عرض الفضي"> عرض الفضي ( عروستين من اختيارك ) </option>
+                <option value="عرض الذهبي"> عرض الذهبي ( عروستين من اختيارك + غوريلا / باندا ) </option>
+                <option value="عرض ال VIP"> عرض ال VIP ( عروستين + DJ ) </option>
+                <option value="عرض ال MASTER VIP"> عرض ال MASTER VIP ( عروستين + DJ + غزل بنات / فشار ) </option>
+                <option value="عرض ال BOSS"> عرض ال BOSS ( عروستين + DJ + غزل بنات / فشار + عروسة من اختيارك) </option>
+                <option value="عرض ال BIG BOSS"> عرض ال BIG BOSS ( عروستين + DJ + غزل بنات + فشار + عروستين من اختيارك) </option>
+            </select>
+
+            <button type="submit">احجز الآن</button>
+        </form>
+        <div id="message"></div>
+
+        <h2>الحجوزات الحالية</h2>
+        <div id="bookingsList"></div>
+    </div>
+
+    <!-- تذييل الصفحة مع حقوق الطبع والنشر -->
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> | تم التصميم والبرمجة بواسطة 
+            <a href="mailto:sk3767272@gmail.com?subject=اتصال%20من%20موقع%20HAPPY%20PARTY&body=مرحبًا%20ENG.%20KHALED%20GAMAL،">ENG. KHALED GAMAL</a>
+        </p>
+    </footer>
+
+    <script>
+        // دالة لحفظ الحجوزات في localStorage
+        function saveBooking(booking) {
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            bookings.push(booking);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        }
+
+        // دالة لعرض الحجوزات
+        function displayBookings() {
+            const bookingsList = document.getElementById('bookingsList');
+            bookingsList.innerHTML = ''; // مسح المحتوى الحالي
+
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            if (bookings.length === 0) {
+                bookingsList.innerHTML = '<p>لا توجد حجوزات حتى الآن.</p>';
+            } else {
+                bookings.forEach((booking, index) => {
+                    const bookingItem = document.createElement('div');
+                    bookingItem.className = 'booking-item';
+                    bookingItem.innerHTML = `
+                        <p><strong>الاسم:</strong> ${booking.name}</p>
+                        <p><strong>رقم الهاتف:</strong> ${booking.phone}</p>
+                        <p><strong>التاريخ:</strong> ${booking.date}</p>
+                        <p><strong>الساعة:</strong> ${booking.time}</p>
+                        <p><strong>الموقع:</strong> ${booking.location}</p>
+                        <p><strong>النوع:</strong> ${booking.package}</p>
+                        <p><strong>العرض:</strong> ${booking.type}</p>
+                        <button onclick="deleteBooking(${index})">حذف</button>
+                    `;
+                    bookingsList.appendChild(bookingItem);
+                });
+            }
+        }
+
+        // دالة لحذف الحجز
+        function deleteBooking(index) {
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            bookings.splice(index, 1); // حذف الحجز من القائمة
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            displayBookings(); // إعادة عرض الحجوزات
+        }
+
+        // دالة لإرسال البريد الإلكتروني
+        function sendEmail(booking) {
+            const emailBody = `
+                الاسم: ${booking.name}
+                رقم الهاتف: ${booking.phone}
+                التاريخ: ${booking.date}
+                الساعة: ${booking.time}
+                الموقع: ${booking.location}
+                النوع: ${booking.package}
+                العرض: ${booking.type}
+            `;
+            window.location.href = `mailto:happyparty.kas@gmail.com?subject=حجز%20جديد&body=${encodeURIComponent(emailBody)}`;
+        }
+
+        // معالجة إرسال النموذج
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const location = document.getElementById('location').value;
+            const package = document.getElementById('package').value;
+            const type = document.getElementById('type').value;
+
+            const booking = { name, phone, date, time, location, package, type };
+            saveBooking(booking); // حفظ الحجز
+
+            document.getElementById('message').textContent = 'تم الحجز بنجاح!';
+            document.getElementById('bookingForm').reset(); // مسح النموذج
+
+            displayBookings(); // عرض الحجوزات المحدثة
+            sendEmail(booking); // إرسال البريد الإلكتروني
+        });
+
+        // عرض الحجوزات عند تحميل الصفحة
+        window.onload = function() {
+            displayBookings();
+            // إضافة السنة الحالية في حقوق الطبع والنشر
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        };
+    </script>
+</body>
+</html>
